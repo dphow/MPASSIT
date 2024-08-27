@@ -1400,8 +1400,11 @@ contains
                 if (wrf_mod_vars .and. trim(varname) == 'T') then
                     do i = clb(1),cub(1)
                     do j = clb(2),cub(2)
-                        if (dum3dptr(i, j,1) == missing_value) cycle
-                        dum3d(i, j, :) = dum3dptr(i, j, :) - 300.0
+                        if (dum3dptr(i, j,1) == missing_value) then
+                           dum3d(i,j,:) = dum3dptr(i,j,:)
+                        else
+                           dum3d(i, j, :) = dum3dptr(i, j, :) - 300.0
+                        endif
                     end do
                     end do
                 else
