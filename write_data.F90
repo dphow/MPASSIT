@@ -1378,24 +1378,24 @@ contains
                 call ESMF_FieldGet(fields(n), farrayPtr = dum3dptr, rc=error)
                 if (ESMF_logFoundError(rcToCheck=error, msg=ESMF_LOGERR_PASSTHRU, line=__LINE__, file=__FILE__)) &
                     call error_handler("IN FieldGather", error)
-                if (localpet == 0) then
-                        if (wrf_mod_vars .and. trim(varname) == 'T') then
-                            do i = 1, i_target
-                            do j = 1, j_target
-                                if (dum3d(i, j, 1) == missing_value) then
-                                   dum3dt(i,j,:,1) = missing_value
-                                else
-                                   dum3dt(i, j, :, 1) = dum3d(i, j, :) - 300.0
-                                endif
-                            end do
-                            end do
-                        else
-                            dum3dt(:, :, :, 1) = dum3d(:, :, :)
-                        end if
-                        print *, trim(varname), minval(dum3dt), maxval(dum3dt)
-                        error = nf90_put_var(ncid, id_vars3_nz(n + n3d), dum3dt, &
-                                             count=(/i_target, j_target, nz_input, 1/))
-                        call netcdf_err(error, 'WRITING RECORD')
+!                if (localpet == 0) then
+!                        if (wrf_mod_vars .and. trim(varname) == 'T') then
+!                            do i = 1, i_target
+!                            do j = 1, j_target
+!                                if (dum3d(i, j, 1) == missing_value) then
+!                                   dum3dt(i,j,:,1) = missing_value
+!                                else
+!                                   dum3dt(i, j, :, 1) = dum3d(i, j, :) - 300.0
+!                                endif
+!                            end do
+!                            end do
+!                        else
+!                            dum3dt(:, :, :, 1) = dum3d(:, :, :)
+!                        end if
+!                        print *, trim(varname), minval(dum3dt), maxval(dum3dt)
+!                        error = nf90_put_var(ncid, id_vars3_nz(n + n3d), dum3dt, &
+!                                             count=(/i_target, j_target, nz_input, 1/))
+!                        call netcdf_err(error, 'WRITING RECORD')
 
                 if (wrf_mod_vars .and. trim(varname) == 'T') then
                     do i = clb(1),cub(1)
