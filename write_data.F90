@@ -1540,12 +1540,12 @@ contains
             allocate(dum3d(count1, count2, nz_input))
             dum3d(:,:,:) = 0.0
             !print *, trim(varname), minval(dum3d), maxval(dum3d)
-            
             error = nf90_put_var(ncid, id_dummy3d_p, dum3d, start = (/clb(1),clb(2),1,1/), & 
                                 count=(/count1, count2, nz_input, 1/))
             call netcdf_err(error, 'WRITING RECORD')
         end if
 
+        if (localpet==0) print*, "deallocating everything"
         deallocate(dum3d, dum1d)
         if (allocated(target_hist_longname_2d_cons)) deallocate (target_hist_longname_2d_cons)
         if (allocated(target_hist_longname_2d_nstd)) deallocate (target_hist_longname_2d_nstd)
@@ -1562,7 +1562,9 @@ contains
         if (allocated(target_hist_units_3d_vert)) deallocate (target_hist_units_3d_vert)
         if (allocated(target_diag_units)) deallocate (target_diag_units)
 
-        if (localpet == 0) error = nf90_close(ncid)
+        
+        error = nf90_close(ncid)
+        call netcdf_err(error, 'CLOSING FILE')
 
     end subroutine write_to_file
 
