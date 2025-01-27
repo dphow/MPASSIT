@@ -1200,6 +1200,7 @@ contains
         error = nf90_put_var(ncid, id_zs, zs_target_grid, count=(/nsoil_input, 1/))
         call netcdf_err(error, 'WRITING ZS RECORD')
 
+
 !  hgt
 
         if (localpet == 0) print *, "- CALL FieldGather FOR TARGET GRID HGT"

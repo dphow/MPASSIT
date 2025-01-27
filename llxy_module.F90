@@ -22,7 +22,7 @@ module llxy_module
    ! The following arrays hold values for all available domains 
    ! NOTE: The entries in the arrays for "domain 0" are used for projection
    !       information of user-specified source data
-   type (proj_info) :: proj_stack
+   type (proj_info),public :: proj_stack
  
    ! The projection and domain that we have computed constants for
    integer :: computed_proj = INVALID
@@ -83,17 +83,17 @@ module llxy_module
                           //'target data in push_source_projection().',ERROR_CODE)
   
       else if (iprojection == PROJ_CASSINI) then
-  
+ 
          call map_set(iprojection, proj_stack, &
                       latinc=user_dlat, &
                       loninc=user_dlon, &
                       stdlon=user_stand_lon, &  
-                      lat1=user_centerlat, &
-                      lon1=user_centerlon, &
+                      lat1=user_known_lat, &
+                      lon1=user_known_lon, &
                       lat0=user_pole_lat, &
                       lon0=user_pole_lon, &
-                      knowni=user_centeri, &
-                      knownj=user_centerj, &
+                      knowni=user_known_x, &
+                      knownj=user_known_y, &
                       r_earth=earth_radius)
   
       else if (iprojection == PROJ_LC) then
