@@ -2,13 +2,11 @@
 ## Build and run module for Derecho
 #############################################################
 
-module --force purge
-
 module load ncarenv/24.12
 module load intel/2024.2.1
 module load mkl/2024.2.2
 module load cray-mpich/8.1.29
-module load netcdf/4.9.2
+module load netcdf-mpi/4.9.3
 module load hdf5-mpi/1.12.3
 
 module load esmf/8.8.0
