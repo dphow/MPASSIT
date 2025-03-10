@@ -77,17 +77,12 @@ elif [[ -L /usrx && "$( readlink /usrx 2> /dev/null )" =~ dell ]] ; then
     fi
     target=wcoss_dell_p3
     module purge
-elif [[ "$(hostname)" == derecho* ]]; then
+elif [[ $NCAR_HOST == "derecho" ]]; then
     target=derecho
-    module purge
-elif [[ -d /glade ]] ; then
-    # We are on NCAR Cheyenne
-    if ( ! eval module help > /dev/null 2>&1 ) ; then
-        echo load the module command 1>&2
-        . /glade/u/apps/ch/opt/lmod/8.1.7/lmod/8.1.7/init/sh
-    fi
-    target=cheyenne
-    module purge
+    module --force purge
+elif [[ $NCAR_HOST == "casper" ]] ; then
+    target=casper
+    module --force purge
 elif [[ -d /ncrc ]] ; then
     target=gaea
 elif [[ "$(hostname)" =~ "Orion" ]]; then
