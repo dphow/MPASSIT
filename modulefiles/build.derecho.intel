@@ -2,6 +2,8 @@
 ## Build and run module for Derecho
 #############################################################
 
+module purge
+
 module load ncarenv/24.12
 module load intel/2024.2.1
 module load mkl/2024.2.2
