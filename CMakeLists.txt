@@ -101,7 +101,8 @@ target_link_libraries(
   PUBLIC
   esmf
   MPI::MPI_Fortran
-  NetCDF::NetCDF_Fortran)
+  NetCDF::NetCDF_Fortran
+  NetCDF::NetCDF_C)
 
 if(OpenMP_Fortran_FOUND)
   target_link_libraries(${exe_name} PUBLIC OpenMP::OpenMP_Fortran)
